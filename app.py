@@ -1,5 +1,6 @@
 import os
 import time
+import base64
 from flask import Flask, render_template, request, jsonify, send_from_directory
 from werkzeug.utils import secure_filename
 from Crypto.Random import get_random_bytes
@@ -36,6 +37,12 @@ def clear_directory(folder_path):
                 os.remove(file_path)
             except:
                 pass
+
+def get_base64_img(file_path):
+    """Read a file and convert it to a base64 string for direct browser rendering."""
+    with open(file_path, "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read()).decode('utf-8')
+    return f"data:image/png;base64,{encoded_string}"
 
 @app.route('/')
 def index():
@@ -99,14 +106,14 @@ def process_pipeline():
         if not os.path.exists(extracted_path):
             return jsonify({'error': 'Failed to extract watermark'}), 500
             
-        # Return URLs to the frontend
+        # Return base64 images directly to avoid Vercel Serverless /tmp loss
         return jsonify({
             'success': True,
-            'watermarked_url': f"/static/results/{watermarked_name}",
-            'decrypted_url': f"/static/results/{decrypted_name}",
-            'extracted_url': f"/static/results/{extracted_name}",
-            'host_url': f"/static/uploads/host_{ts}_{host_filename}",
-            'watermark_url': f"/static/uploads/wm_{ts}_{watermark_filename}"
+            'watermarked_url': get_base64_img(watermarked_path),
+            'decrypted_url': get_base64_img(decrypted_path),
+            'extracted_url': get_base64_img(extracted_path),
+            'host_url': get_base64_img(host_path),
+            'watermark_url': get_base64_img(watermark_path)
         })
 
     except Exception as e:
