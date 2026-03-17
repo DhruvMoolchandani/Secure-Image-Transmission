@@ -4,6 +4,8 @@
 **Course:** Image Forensics and Security  
 **Topic:** Multimedia Security / Digital Watermarking
 
+🚀 **Live Web App:** [https://secure-image-transmission.vercel.app/](https://secure-image-transmission.vercel.app/)
+
 ---
 
 ## 📖 Project Overview
