@@ -4,3 +4,6 @@ pycryptodome
 numpy
 matplotlib
 scikit-image
+Flask
+pillow
+gunicorn

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Image Transmission</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="background-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+    
+    <main class="container">
+        <header>
+            <h1>Secure Image Transmission</h1>
+            <p>Embed DWT watermarks and transmit securely using AES-GCM encryption.</p>
+        </header>
+
+        <section class="card glass-effect">
+            <form id="pipeline-form">
+                <div class="upload-grid">
+                    <div class="upload-box" id="host-drop">
+                        <input type="file" id="host_image" name="host_image" accept="image/png, image/jpeg" required hidden>
+                        <div class="upload-content">
+                            <span class="icon">🖼️</span>
+                            <h3>Host Image</h3>
+                            <p>Drag & drop or Click to upload</p>
+                        </div>
+                        <img id="host-preview" class="preview-img hidden">
+                    </div>
+
+                    <div class="upload-box" id="wm-drop">
+                        <input type="file" id="watermark_image" name="watermark_image" accept="image/png, image/jpeg" required hidden>
+                        <div class="upload-content">
+                            <span class="icon">💧</span>
+                            <h3>Watermark Image</h3>
+                            <p>Drag & drop or Click to upload</p>
+                        </div>
+                        <img id="wm-preview" class="preview-img hidden">
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <div class="slider-container">
+                        <label for="alpha">Watermark Strength (Alpha) : <span id="alpha-val">25.0</span></label>
+                        <input type="range" id="alpha" name="alpha" min="1.0" max="50.0" step="1.0" value="25.0">
+                    </div>
+                    
+                    <button type="submit" id="submit-btn" class="btn primary-btn">
+                        <span class="btn-text">Run Security Pipeline</span>
+                        <span class="loader hidden"></span>
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Defense Applications Section -->
+        <section class="card glass-effect applications-section">
+            <h2>Real-World Defense & Security Applications</h2>
+            <p class="section-desc">This combination of <strong>DWT Watermarking</strong> and <strong>AES-GCM Encryption</strong> ensures Confidentiality, Integrity, and Proof of Origin.</p>
+            
+            <div class="app-grid">
+                <div class="app-card">
+                    <h3>🚁 Secure UAV Transmission</h3>
+                    <p>Drones embed covert signatures (like GPS) before AES-GCM encryption. If enemies alter signals mid-air, GCM authentication fails instantly.</p>
+                </div>
+                <div class="app-card">
+                    <h3>🕵️ Traitor Tracing</h3>
+                    <p>Classified maps are uniquely watermarked before distribution. If a map leaks online, extraction reveals the exact source, even if cropped.</p>
+                </div>
+                <div class="app-card">
+                    <h3>📡 Covert Communications</h3>
+                    <p>Operatives embed secret orders as a watermark inside innocent-looking photos (steganography) to avoid suspicion during device searches.</p>
+                </div>
+                <div class="app-card">
+                    <h3>🛡️ Battlefield Authentication</h3>
+                    <p>The watermark acts as a built-in stamp. Field units extract it to verify the origin of tactical updates and avoid spoofed enemy ambushes.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results-section" class="card glass-effect hidden">
+            <h2>Process Results</h2>
+            <div class="results-grid">
+                
+                <div class="result-box">
+                    <h3>1. Watermarked Image</h3>
+                    <div class="img-wrapper">
+                        <img id="res-watermarked" src="" alt="Watermarked Image">
+                    </div>
+                </div>
+
+                <div class="result-box">
+                    <h3>2. Decrypted Image</h3>
+                    <p class="success-text">✅ AES-GCM Integrity Verified</p>
+                    <div class="img-wrapper">
+                        <img id="res-decrypted" src="" alt="Decrypted Image">
+                    </div>
+                </div>
+
+                <div class="result-box full-width">
+                    <h3>3. Extracted Watermark</h3>
+                    <div class="img-wrapper watermark-extract-wrapper">
+                        <img id="res-extracted" src="" alt="Extracted Watermark">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
