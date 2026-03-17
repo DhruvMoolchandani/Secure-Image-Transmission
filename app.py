@@ -12,8 +12,13 @@ from chaos_cipher import encrypt_decrypt_chaos
 app = Flask(__name__)
 
 # Configure upload and result folders
-UPLOAD_FOLDER = os.path.join(app.root_path, 'static', 'uploads')
-RESULT_FOLDER = os.path.join(app.root_path, 'static', 'results')
+# In Vercel serverless environment, only /tmp is writable
+if os.environ.get('VERCEL') == '1':
+    UPLOAD_FOLDER = '/tmp/uploads'
+    RESULT_FOLDER = '/tmp/results'
+else:
+    UPLOAD_FOLDER = os.path.join(app.root_path, 'static', 'uploads')
+    RESULT_FOLDER = os.path.join(app.root_path, 'static', 'results')
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(RESULT_FOLDER, exist_ok=True)
